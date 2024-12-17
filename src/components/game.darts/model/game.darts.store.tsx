@@ -19,11 +19,17 @@ export const useGameDartsStore = create<GameDartsStore>()(
           set(
             (state) => {
               const { players, type } = form;
+
+              const order = [];
+
               for (const { value } of players) {
                 const player = startPlayer(value, Number(type));
                 state.players[player.id] = player;
+                order.push(player.id);
               }
 
+              state.order = order;
+              state.move = order[0];
               state.initialized = true;
             },
             undefined,

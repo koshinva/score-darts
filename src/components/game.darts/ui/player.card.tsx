@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { PlayerMoveIndicator } from './player.move.indicator';
 
 type PlayerCardProps = {
   id: PlayerId;
@@ -27,9 +28,10 @@ export const PlayerCard = (props: PlayerCardProps) => {
 
   return (
     <Card>
-      <CardHeader className="text-center">
+      <CardHeader className="text-center relative">
         <CardTitle>{player.name}</CardTitle>
         <CardDescription className="text-8xl font-semibold">{player.progress}</CardDescription>
+        <PlayerMoveIndicator id={id} />
         <Separator />
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-2 p-4 pt-0">

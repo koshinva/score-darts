@@ -4,6 +4,8 @@ import { PlayerId, PlayerStatus } from './player.game.types';
 export type GameDartsState = {
   initialized: boolean;
   players: Record<PlayerId, PlayerStatus>;
+  order: PlayerId[];
+  move: PlayerId | null;
 };
 
 export type GameDartsActions = {
