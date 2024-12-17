@@ -9,8 +9,11 @@ import { GameFormContainer } from './game.form.container';
 import { GameSetsSelect } from './game.sets.select';
 import { GameLegsSelect } from './game.legs.select';
 import { GamePlayersFields } from './game.players.fields';
+import { useModeGameStore } from '@/components/game.mode/model/mode.game.store';
 
 const GameForm = () => {
+  const setInitial = useModeGameStore((state) => state.setInitial);
+
   const form = useForm<GameFormType>({
     reValidateMode: 'onChange',
     resolver: zodResolver(gameFormSchema),
@@ -22,7 +25,7 @@ const GameForm = () => {
   } = form;
 
   function onSubmit(values: GameFormType) {
-    console.log(values);
+    setInitial(values);
   }
 
   return (

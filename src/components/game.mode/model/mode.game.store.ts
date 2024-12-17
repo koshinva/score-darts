@@ -12,14 +12,14 @@ export const useModeGameStore = create<ModeGameStore>()(
   devtools(
     persist(
       immer((set) => ({
-        mode: 'start',
-        setMode: (mode) => {
+        initial: null,
+        setInitial: (data) => {
           set(
             (state) => {
-              state.mode = mode;
+              state.initial = data;
             },
             undefined,
-            modeGameStoreConfig.generateNameAction('setMode')
+            modeGameStoreConfig.generateNameAction('setInitial')
           );
         },
       })),
