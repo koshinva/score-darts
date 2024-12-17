@@ -8,9 +8,11 @@ import { defaultValues } from '../model/default.values';
 import { GameFormContainer } from './game.form.container';
 import { GameSetsSelect } from './game.sets.select';
 import { GameLegsSelect } from './game.legs.select';
+import { GamePlayersFields } from './game.players.fields';
 
 const GameForm = () => {
   const form = useForm<GameFormType>({
+    reValidateMode: 'onChange',
     resolver: zodResolver(gameFormSchema),
     defaultValues: defaultValues,
   });
@@ -22,10 +24,11 @@ const GameForm = () => {
   return (
     <GameFormContainer>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <GameTypeGroup />
           <GameSetsSelect />
           <GameLegsSelect />
+          <GamePlayersFields />
           <Button type="submit">Начать игру</Button>
         </form>
       </Form>
