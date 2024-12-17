@@ -9,10 +9,10 @@ import { GameFormContainer } from './game.form.container';
 import { GameSetsSelect } from './game.sets.select';
 import { GameLegsSelect } from './game.legs.select';
 import { GamePlayersFields } from './game.players.fields';
-import { useModeGameStore } from '@/components/game.mode/model/mode.game.store';
+import { useGameDartsStore } from '@/components/game.darts';
 
 const GameForm = () => {
-  const setInitial = useModeGameStore((state) => state.setInitial);
+  const initGame = useGameDartsStore((state) => state.initGame);
 
   const form = useForm<GameFormType>({
     reValidateMode: 'onChange',
@@ -25,7 +25,7 @@ const GameForm = () => {
   } = form;
 
   function onSubmit(values: GameFormType) {
-    setInitial(values);
+    initGame(values);
   }
 
   return (
