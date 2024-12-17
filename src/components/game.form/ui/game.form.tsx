@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { GameTypeGroup } from './game.type.group';
 import { defaultValues } from '../model/default.values';
 import { GameFormContainer } from './game.form.container';
+import { GameSetsSelect } from './game.sets.select';
+import { GameLegsSelect } from './game.legs.select';
 
 const GameForm = () => {
   const form = useForm<GameFormType>({
@@ -22,6 +24,8 @@ const GameForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <GameTypeGroup />
+          <GameSetsSelect />
+          <GameLegsSelect />
           <Button type="submit">Начать игру</Button>
         </form>
       </Form>

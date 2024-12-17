@@ -3,6 +3,7 @@ import { GameFormType } from '../model/schema';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { gameType } from '@/shared/settings/game.type';
+import { GameFormLabel } from './game.form.label';
 
 export const GameTypeGroup = () => {
   const form = useFormContext<GameFormType>();
@@ -13,7 +14,7 @@ export const GameTypeGroup = () => {
       name="type"
       render={({ field }) => (
         <FormItem className="flex flex-col gap-4">
-          <FormLabel className="font-semibold text-xl">Тип игры</FormLabel>
+          <GameFormLabel label="Тип игры" />
           <FormControl>
             <RadioGroup
               onValueChange={field.onChange}
@@ -26,7 +27,7 @@ export const GameTypeGroup = () => {
                     <FormControl>
                       <RadioGroupItem value={type} />
                     </FormControl>
-                    <FormLabel className="font-normal text-lg">{type}</FormLabel>
+                    <FormLabel className="font-normal">{type}</FormLabel>
                   </FormItem>
                 );
               })}
