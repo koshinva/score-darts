@@ -4,6 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 import { persist, devtools } from 'zustand/middleware';
 import { initialGameDartsState } from './initial.game.darts';
 import { startPlayer } from './start.player';
+import { parseMod } from '@/shared/helpers/parse.mod';
 
 const modeGameDartsStoreConfig = {
   root: 'game-darts',
@@ -18,7 +19,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
         initGame: (form) => {
           set(
             (state) => {
-              const { players, type } = form;
+              const { players, type, legs, sets } = form;
 
               const order = [];
 
@@ -26,6 +27,14 @@ export const useGameDartsStore = create<GameDartsStore>()(
                 const player = startPlayer(value, Number(type));
                 state.players[player.id] = player;
                 order.push(player.id);
+              }
+
+              const { mod, value } = parseMod(legs);
+              state.legs = { current: 0, type: mod, total: value };
+
+              if (sets !== 'no') {
+                const { mod, value } = parseMod(sets);
+                state.sets = { current: 0, type: mod, total: value };
               }
 
               state.order = order;

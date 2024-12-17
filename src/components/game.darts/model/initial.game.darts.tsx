@@ -5,4 +5,6 @@ export const initialGameDartsState: GameDartsState = {
   players: {},
   order: [],
   move: null,
+  legs: null,
+  sets: null,
 };
