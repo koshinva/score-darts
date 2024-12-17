@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { GameFormType } from '../model/schema';
-import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Select } from '@radix-ui/react-select';
 import {
   SelectContent,
@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select';
 import { setsOptions } from '@/shared/settings/sets.type';
 import { GameFormLabel } from './game.form.label';
+import { GameFormMessage } from './game.form.message';
 
 export const GameSetsSelect = () => {
   const form = useFormContext<GameFormType>();
@@ -58,7 +59,7 @@ export const GameSetsSelect = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <FormMessage />
+          <GameFormMessage />
         </FormItem>
       )}
     />

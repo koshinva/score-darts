@@ -1,9 +1,10 @@
 import { useFormContext } from 'react-hook-form';
 import { GameFormType } from '../model/schema';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { gameType } from '@/shared/settings/game.type';
 import { GameFormLabel } from './game.form.label';
+import { GameFormMessage } from './game.form.message';
 
 export const GameTypeGroup = () => {
   const form = useFormContext<GameFormType>();
@@ -33,7 +34,7 @@ export const GameTypeGroup = () => {
               })}
             </RadioGroup>
           </FormControl>
-          <FormMessage />
+          <GameFormMessage />
         </FormItem>
       )}
     />

@@ -17,6 +17,10 @@ const GameForm = () => {
     defaultValues: defaultValues,
   });
 
+  const {
+    formState: { disabled, isValid },
+  } = form;
+
   function onSubmit(values: GameFormType) {
     console.log(values);
   }
@@ -26,10 +30,18 @@ const GameForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <GameTypeGroup />
-          <GameSetsSelect />
-          <GameLegsSelect />
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex-1 min-w-48">
+              <GameSetsSelect />
+            </div>
+            <div className="flex-1 min-w-48">
+              <GameLegsSelect />
+            </div>
+          </div>
           <GamePlayersFields />
-          <Button type="submit">Начать игру</Button>
+          <Button type="submit" disabled={disabled || !isValid}>
+            Начать игру
+          </Button>
         </form>
       </Form>
     </GameFormContainer>

@@ -1,10 +1,11 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { GameFormType } from '../model/schema';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { MinusCircleIcon, PlusCircleIcon } from 'lucide-react';
 import { GameFormLabel } from './game.form.label';
+import { GameFormMessage } from './game.form.message';
 
 export const GamePlayersFields = () => {
   const { control } = useFormContext<GameFormType>();
@@ -46,7 +47,7 @@ export const GamePlayersFields = () => {
                         </Button>
                       )}
                     </div>
-                    <FormMessage className="text-xs text-destructive/80" />
+                    <GameFormMessage />
                   </FormItem>
                 )}
               />
