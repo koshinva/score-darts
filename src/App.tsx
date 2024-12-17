@@ -1,11 +1,7 @@
-import { Button } from './components/ui/button';
+import { GameMode } from './components/game.mode';
 
 function App() {
-  return (
-    <div>
-      <Button>Click me</Button>
-    </div>
-  );
+  return <GameMode />;
 }
 
 export default App;
