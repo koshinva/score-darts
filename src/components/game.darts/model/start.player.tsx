@@ -13,6 +13,6 @@ export const startPlayer = (name: string, progress: number): PlayerStatus => {
     legAvg: 0,
     setsWin: 0,
     legsWin: 0,
-    reserve: null,
+    legSteps: [],
   };
 };

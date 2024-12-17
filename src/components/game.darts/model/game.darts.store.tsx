@@ -45,6 +45,45 @@ export const useGameDartsStore = create<GameDartsStore>()(
             modeGameDartsStoreConfig.generateNameAction('initGame')
           );
         },
+        undoMove: () => {
+          set(
+            (state) => {
+              console.log('undoMove', state);
+            },
+            undefined,
+            modeGameDartsStoreConfig.generateNameAction('undoMove')
+          );
+        },
+
+        toggleModCalculator: () => {
+          set(
+            (state) => {
+              state.modCalculator = state.modCalculator === 'simple' ? 'advanced' : 'simple';
+            },
+            undefined,
+            modeGameDartsStoreConfig.generateNameAction('toggleModCalculator')
+          );
+        },
+
+        setScoreCalculator: (value) => {
+          set(
+            (state) => {
+              if (value === null) {
+                state.scoreCalculator = null;
+                return;
+              }
+              const current = (state.scoreCalculator ?? '').toString();
+              const modify = Number(current + value.toString());
+              if (modify > 180) {
+                return;
+              }
+              state.scoreCalculator = modify;
+            },
+            undefined,
+            modeGameDartsStoreConfig.generateNameAction('setScoreCalculator')
+          );
+        },
+
         reset: () => {
           set(
             initialGameDartsState,
