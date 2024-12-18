@@ -12,6 +12,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { PlayerMoveIndicator } from './player.move.indicator';
+import { mean, last } from 'lodash';
 
 type PlayerCardProps = {
   id: PlayerId;
@@ -35,13 +36,17 @@ export const PlayerCard = (props: PlayerCardProps) => {
         <Separator />
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-2 p-4 pt-0">
-        <PlayerBadgeDetail title="среднее" value={player.avg.toFixed(2)} />
-        <PlayerBadgeDetail title="среднее (раунд)" value={player.legAvg.toFixed(2)} />
+        <PlayerBadgeDetail title="среднее" value={mean(player.scores).toFixed(2)} />
+        <PlayerBadgeDetail title="среднее (раунд)" value={mean(player.legScores).toFixed(2)} />
         <PlayerBadgeDetail title="партии" value={player.legsWin} />
         <PlayerBadgeDetail title="сеты" value={player.setsWin} />
       </CardContent>
       <CardFooter className="p-4 pt-0 flex justify-end">
-        <PlayerBadgeDetail title="последний ход" value={player.lastScore} className="text-md" />
+        <PlayerBadgeDetail
+          title="последний ход"
+          value={last(player.legScores) ?? 0}
+          className="text-md"
+        />
       </CardFooter>
     </Card>
   );

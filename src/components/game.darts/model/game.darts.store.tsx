@@ -5,6 +5,8 @@ import { persist, devtools } from 'zustand/middleware';
 import { initialGameDartsState } from './initial.game.darts';
 import { startPlayer } from './start.player';
 import { parseMod } from '@/shared/helpers/parse.mod';
+import { StepsId } from '../types/steps.of.leg';
+import { PlayerId, PlayerStatus } from '../types/player.game.types';
 
 const modeGameDartsStoreConfig = {
   root: 'game-darts',
@@ -19,14 +21,23 @@ export const useGameDartsStore = create<GameDartsStore>()(
         initGame: (form) => {
           set(
             (state) => {
-              const { players, type, legs, sets } = form;
+              const { players: formPlayers, type, legs, sets } = form;
 
-              const order = [];
+              if (formPlayers.length < 2 || formPlayers.length > 4) {
+                return;
+              }
 
-              for (const { value } of players) {
+              const players = {} as Record<PlayerId, PlayerStatus>;
+              const order = {} as Record<PlayerId, PlayerId>;
+
+              for (const { value } of formPlayers) {
                 const player = startPlayer(value, Number(type));
-                state.players[player.id] = player;
-                order.push(player.id);
+                players[player.id] = player;
+              }
+
+              const playerIds = Object.keys(players);
+              for (let i = 0; i < playerIds.length; i++) {
+                order[playerIds[i]] = playerIds[(i + 1) % playerIds.length];
               }
 
               const { mod, value } = parseMod(legs);
@@ -37,8 +48,10 @@ export const useGameDartsStore = create<GameDartsStore>()(
                 state.sets = { current: 0, type: mod, total: value };
               }
 
+              state.players = players;
               state.order = order;
-              state.move = order[0];
+              state.move = playerIds[0];
+              state.type = type;
               state.initialized = true;
             },
             undefined,
@@ -81,6 +94,66 @@ export const useGameDartsStore = create<GameDartsStore>()(
             },
             undefined,
             modeGameDartsStoreConfig.generateNameAction('setScoreCalculator')
+          );
+        },
+
+        takeMove: () => {
+          set(
+            (state) => {
+              const player = state.players[state.move ?? ''];
+              const score = state.scoreCalculator;
+
+              if (!player || score === null) return;
+
+              const diff = player.progress - score;
+
+              state.scoreCalculator = null;
+
+              const stepId = crypto.randomUUID() as StepsId;
+              state.stepsOfLeg.push({
+                id: stepId,
+                playerId: player.id,
+                score: diff < 0 ? 0 : score,
+              });
+
+              if (diff > 0) {
+                player.progress = player.progress - score;
+                player.scores.push(score);
+                player.legScores.push(score);
+                player.legSteps.push(stepId);
+
+                state.move = state.order[player.id];
+
+                return;
+              }
+
+              if (diff < 0) {
+                player.scores.push(0);
+                player.legScores.push(0);
+                player.legSteps.push(stepId);
+
+                state.move = state.order[player.id];
+
+                return;
+              }
+
+              if (diff === 0) {
+                player.scores.push(score);
+                player.legsWin += 1;
+                player.legSteps.push(stepId);
+
+                state.move = player.id;
+
+                const playerIds = Object.keys(state.players);
+                for (const id of playerIds) {
+                  state.players[id].legSteps = [];
+                  state.players[id].legScores = [];
+                  state.players[id].progress = Number(state.type);
+                }
+              }
+            },
+            undefined,
+            modeGameDartsStoreConfig.generateNameAction('takeMove')
           );
         },
 

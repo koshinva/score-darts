@@ -3,13 +3,15 @@ import { PlayerId, PlayerStatus } from './player.game.types';
 import { ModFinish } from '@/shared/settings/mod.finish.type';
 import { ModCalculator } from './calculator.types';
 import { StepsOfLeg } from './steps.of.leg';
+import { GameType } from '@/shared/settings/game.type';
 
 export type GameDartsState = {
   initialized: boolean;
   players: Record<PlayerId, PlayerStatus>;
-  order: PlayerId[];
+  order: Record<PlayerId, PlayerId>;
   move: PlayerId | null;
   stepsOfLeg: StepsOfLeg[];
+  type: GameType | null;
   legs: {
     total: number;
     type: ModFinish;
@@ -28,6 +30,7 @@ export type GameDartsActions = {
   initGame: (form: GameFormType) => void;
   toggleModCalculator: () => void;
   setScoreCalculator: (value: number | string | null) => void;
+  takeMove: () => void;
   undoMove: () => void;
   reset: () => void;
 };
