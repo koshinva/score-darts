@@ -9,7 +9,7 @@ export const OkButton = () => {
     <Button
       disabled={scoreCalculator === null}
       className="w-full h-full bg-success rounded-none [&_svg]:size-6 text-success-foreground hover:text-background text-lg"
-      onClick={takeMove}
+      onClick={() => takeMove()}
     >
       Ok
     </Button>

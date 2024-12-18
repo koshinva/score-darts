@@ -30,7 +30,7 @@ export type GameDartsActions = {
   initGame: (form: GameFormType) => void;
   toggleModCalculator: () => void;
   setScoreCalculator: (value: number | string | null) => void;
-  takeMove: () => void;
+  takeMove: (isBust?: boolean) => void;
   undoMove: () => void;
   reset: () => void;
 };

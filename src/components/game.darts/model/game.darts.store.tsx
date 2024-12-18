@@ -97,11 +97,11 @@ export const useGameDartsStore = create<GameDartsStore>()(
           );
         },
 
-        takeMove: () => {
+        takeMove: (isBust) => {
           set(
             (state) => {
               const player = state.players[state.move ?? ''];
-              const score = state.scoreCalculator;
+              const score = isBust ? 9999 : state.scoreCalculator;
 
               if (!player || score === null) return;
 
