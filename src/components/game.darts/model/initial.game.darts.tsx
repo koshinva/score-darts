@@ -6,8 +6,16 @@ export const initialGameDartsState: GameDartsState = {
   order: {},
   move: null,
   type: null,
-  legs: null,
-  sets: null,
+  legs: {
+    total: null,
+    type: null,
+    current: 0,
+  },
+  sets: {
+    total: null,
+    type: null,
+    current: 0,
+  },
   stepsOfLeg: [],
   modCalculator: 'simple',
   scoreCalculator: null,

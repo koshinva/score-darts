@@ -139,16 +139,53 @@ export const useGameDartsStore = create<GameDartsStore>()(
 
               if (diff === 0) {
                 player.scores.push(score);
-                player.legsWin += 1;
-                player.legSteps.push(stepId);
-
-                state.move = player.id;
 
                 const playerIds = Object.keys(state.players);
+
                 for (const id of playerIds) {
                   state.players[id].legSteps = [];
                   state.players[id].legScores = [];
                   state.players[id].progress = Number(state.type);
+                }
+
+                const currentLeg = state.legs.current + 1;
+                const selfLegsWin = state.players[player.id].legsWin + 1;
+                const totalLegs = state.legs.total;
+                const typeLegFinal = state.legs.type;
+
+                const bestWinOfLegs = currentLeg === totalLegs && typeLegFinal === 'bestOf';
+                const firstWinOfLegs = selfLegsWin === totalLegs && typeLegFinal === 'firstOf';
+
+                if (bestWinOfLegs || firstWinOfLegs) {
+                  if (state.sets.type === null) {
+                    Object.assign(state, initialGameDartsState);
+                    return;
+                  } else {
+                    const currentSet = state.sets.current + 1;
+                    const selfSetsWin = state.players[player.id].setsWin + 1;
+                    const totalSets = state.sets.total;
+                    const typeSetFinal = state.sets.type;
+
+                    const bestWinOfSets = currentSet === totalSets && typeSetFinal === 'bestOf';
+                    const firstWinOfSets = selfSetsWin === totalSets && typeSetFinal === 'firstOf';
+
+                    if (bestWinOfSets || firstWinOfSets) {
+                      Object.assign(state, initialGameDartsState);
+                      return;
+                    } else {
+                      state.sets.current += 1;
+                      player.setsWin += 1;
+
+                      state.legs.current = 0;
+                      player.legsWin += 1;
+
+                      state.move = player.id;
+                    }
+                  }
+                } else {
+                  state.legs.current += 1;
+                  player.legsWin += 1;
+                  state.move = player.id;
                 }
               }
             },

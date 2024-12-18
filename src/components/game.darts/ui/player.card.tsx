@@ -36,8 +36,14 @@ export const PlayerCard = (props: PlayerCardProps) => {
         <Separator />
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-2 p-4 pt-0">
-        <PlayerBadgeDetail title="среднее" value={mean(player.scores).toFixed(2)} />
-        <PlayerBadgeDetail title="среднее (раунд)" value={mean(player.legScores).toFixed(2)} />
+        <PlayerBadgeDetail
+          title="среднее"
+          value={(player.scores.length > 0 ? mean(player.scores) : 0).toFixed(2)}
+        />
+        <PlayerBadgeDetail
+          title="среднее (раунд)"
+          value={(player.legScores.length > 0 ? mean(player.legScores) : 0).toFixed(2)}
+        />
         <PlayerBadgeDetail title="партии" value={player.legsWin} />
         <PlayerBadgeDetail title="сеты" value={player.setsWin} />
       </CardContent>

@@ -13,15 +13,15 @@ export type GameDartsState = {
   stepsOfLeg: StepsOfLeg[];
   type: GameType | null;
   legs: {
-    total: number;
-    type: ModFinish;
+    total: number | null;
+    type: ModFinish | null;
     current: number;
-  } | null;
+  };
   sets: {
-    total: number;
-    type: ModFinish;
+    total: number | null;
+    type: ModFinish | null;
     current: number;
-  } | null;
+  };
   modCalculator: ModCalculator;
   scoreCalculator: number | null;
 };
