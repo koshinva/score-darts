@@ -1,6 +1,7 @@
 import { useGameDartsStore } from '@/components/game.darts';
 import { Button } from '@/components/ui/button';
 import { BoltIcon, LogOutIcon } from 'lucide-react';
+import { ToggleTheme } from './toggle.theme';
 
 export const Header = () => {
   const reset = useGameDartsStore((state) => state.reset);
@@ -13,8 +14,9 @@ export const Header = () => {
           <BoltIcon size={40} className="stroke-muted-foreground" />
           <span className="font-semibold text-lg">darts score</span>
         </div>
-        <div className="">
-          <Button variant="outline" size="sm" onClick={reset} disabled={!initialized}>
+        <div className="flex items-center gap-2">
+          <ToggleTheme />
+          <Button variant="outline" size="icon" onClick={reset} disabled={!initialized}>
             <LogOutIcon />
           </Button>
         </div>
