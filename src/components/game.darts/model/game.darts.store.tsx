@@ -69,7 +69,22 @@ export const useGameDartsStore = create<GameDartsStore>()(
         undoMove: () => {
           set(
             (state) => {
-              console.log('undoMove', state);
+              if (state.stepsOfLeg.length === 0) return;
+
+              const lastStep = state.stepsOfLeg.pop();
+              const playerId = lastStep?.playerId;
+
+              if (!playerId || !state.players[playerId]) return;
+
+              const player = state.players[playerId];
+
+              player.scores.pop();
+              player.legSteps.pop();
+
+              const lastScore = player.legScores.pop();
+              player.progress = player.progress + (lastScore ?? 0);
+
+              state.move = playerId;
             },
             undefined,
             modeGameDartsStoreConfig.generateNameAction('undoMove')
