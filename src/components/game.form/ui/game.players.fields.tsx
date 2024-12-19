@@ -57,7 +57,7 @@ export const GamePlayersFields = () => {
       </ul>
       <Button
         type="button"
-        className="flex items-center gap-2"
+        className="flex items-center gap-2 self-start"
         variant="outline"
         disabled={fields.length >= 4}
         onClick={() => append({ value: '' })}

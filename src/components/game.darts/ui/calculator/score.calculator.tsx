@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { useGameDartsStore } from '../../model/game.darts.store';
+import { EllipsisIcon } from 'lucide-react';
 
 export const ScoreCalculator = () => {
   const scoreCalculator = useGameDartsStore((state) => state.scoreCalculator);
@@ -11,7 +12,7 @@ export const ScoreCalculator = () => {
           'animate-pulse font-normal': scoreCalculator === null,
         })}
       >
-        {scoreCalculator ? scoreCalculator : 'счет'}
+        {scoreCalculator ? scoreCalculator : <EllipsisIcon />}
       </p>
     </div>
   );

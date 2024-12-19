@@ -35,8 +35,8 @@ export const ResetGame = () => {
               Если сбросите игру, то вы потеряете все данные текущего сеанса.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
-            <DialogClose asChild>
+          <DialogFooter className="flex flex-row justify-end gap-2">
+            <DialogClose>
               <Button type="button" variant="secondary">
                 Отменить
               </Button>

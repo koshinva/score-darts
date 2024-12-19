@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { useGameDartsStore } from '../../model/game.darts.store';
+import { XIcon } from 'lucide-react';
 
 export const ClearScoreButton = () => {
   const setScoreCalculator = useGameDartsStore((state) => state.setScoreCalculator);
@@ -11,7 +12,7 @@ export const ClearScoreButton = () => {
       className="rounded-none [&_svg]:size-6 text-xl"
       onClick={() => setScoreCalculator(null)}
     >
-      Очистить
+      <XIcon />
     </Button>
   );
 };

@@ -29,14 +29,30 @@ export const PlayerCard = (props: PlayerCardProps) => {
   }
 
   return (
-    <Card className={cn('opacity-65', { 'opacity-100': move === id })}>
-      <CardHeader className="text-center relative">
-        <CardTitle>{player.name}</CardTitle>
-        <CardDescription className="text-8xl font-semibold">{player.progress}</CardDescription>
+    <Card
+      className={cn('opacity-65 col-span-6 max-md:col-span-4', {
+        'opacity-100 max-md:col-span-12 max-md:order-1': move === id,
+      })}
+    >
+      <CardHeader
+        className={cn('text-center relative', {
+          'max-md:p-2 space-y-0.5': move !== id,
+        })}
+      >
+        <CardTitle className={cn({ 'max-md:text-xl': move !== id })}>{player.name}</CardTitle>
+        <CardDescription
+          className={cn('text-8xl font-semibold', { 'max-md:text-2xl': move !== id })}
+        >
+          {player.progress}
+        </CardDescription>
         <PlayerMoveIndicator type={move === id ? 'active' : undefined} />
-        <Separator />
+        <Separator className={cn({ 'max-md:hidden': move !== id })} />
       </CardHeader>
-      <CardContent className="grid grid-cols-2 gap-2 p-4 pt-0">
+      <CardContent
+        className={cn('grid grid-cols-2 gap-2 p-4 pt-0', {
+          'max-md:hidden': move !== id,
+        })}
+      >
         <PlayerBadgeDetail
           title="среднее"
           value={(player.scores.length > 0 ? mean(player.scores) : 0).toFixed(2)}
@@ -48,7 +64,7 @@ export const PlayerCard = (props: PlayerCardProps) => {
         <PlayerBadgeDetail title="партии" value={player.legsWin} />
         <PlayerBadgeDetail title="сеты" value={player.setsWin} />
       </CardContent>
-      <CardFooter className="p-4 pt-0 flex justify-end">
+      <CardFooter className={cn('p-4 pt-0 flex justify-end ', { 'max-md:hidden': move !== id })}>
         <div className="flex items-center gap-1 text-sm">
           <span>Последний ход:</span>
           <span className="font-semibold">{last(player.legScores) ?? 0}</span>
@@ -70,7 +86,10 @@ const PlayerBadgeDetail = (props: PlayerBadgeDetailProps) => {
   return (
     <Badge
       variant="secondary"
-      className={cn('text-xs rounded-md font-normal justify-between', className)}
+      className={cn(
+        'text-xs rounded-md font-normal justify-between max-md:flex-col max-md:gap-0',
+        className
+      )}
     >
       <span className="mr-1 opacity-80">{title}:</span>
       <span className="font-semibold">{value}</span>

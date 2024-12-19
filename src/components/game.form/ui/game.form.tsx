@@ -42,7 +42,7 @@ const GameForm = () => {
             </div>
           </div>
           <GamePlayersFields />
-          <Button type="submit" disabled={disabled || !isValid}>
+          <Button type="submit" className='w-full' disabled={disabled || !isValid}>
             Начать игру
           </Button>
         </form>

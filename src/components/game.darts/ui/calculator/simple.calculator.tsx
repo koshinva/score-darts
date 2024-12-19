@@ -1,4 +1,5 @@
 import { BustButton } from './bust.button';
+import { CalculatorKeyWrapper } from './calculator.key.wrapper';
 import { ClearScoreButton } from './clear.score.button';
 import { HotKeyButton } from './hotkey.button';
 import { OkButton } from './ok.button';
@@ -10,38 +11,38 @@ import { UndoButton } from './undo.button';
 export const SimpleCalculator = () => {
   return (
     <div className="grid grid-cols-12 grid-rows-[80px,repeat(3,100px)]">
-      <div className="col-span-2 border border-border">
+      <CalculatorKeyWrapper span={2}>
         <UndoButton />
-      </div>
-      <div className="col-span-2 border border-border">
+      </CalculatorKeyWrapper>
+      <CalculatorKeyWrapper span={2}>
         <HotKeyButton />
-      </div>
-      <div className="col-span-4 border border-border">
+      </CalculatorKeyWrapper>
+      <CalculatorKeyWrapper span={4}>
         <ScoreCalculator />
-      </div>
-      <div className="col-span-2 border border-border">
+      </CalculatorKeyWrapper>
+      <CalculatorKeyWrapper span={2}>
         <ToggleMod />
-      </div>
-      <div className="col-span-2 border border-border">
+      </CalculatorKeyWrapper>
+      <CalculatorKeyWrapper span={2}>
         <BustButton />
-      </div>
+      </CalculatorKeyWrapper>
       {Array.from({ length: 8 }, (_, i) => (
-        <div key={i} className="col-span-3 border border-border">
+        <CalculatorKeyWrapper key={i} span={3}>
           <SimpleKeyButton value={i + 1} />
-        </div>
+        </CalculatorKeyWrapper>
       ))}
-      <div className="col-span-3 border border-border">
+      <CalculatorKeyWrapper span={3}>
         <ClearScoreButton />
-      </div>
-      <div className="col-span-3 border border-border">
+      </CalculatorKeyWrapper>
+      <CalculatorKeyWrapper span={3}>
         <SimpleKeyButton value={9} />
-      </div>
-      <div className="col-span-3 border border-border">
+      </CalculatorKeyWrapper>
+      <CalculatorKeyWrapper span={3}>
         <SimpleKeyButton value={0} />
-      </div>
-      <div className="col-span-3 border border-border">
+      </CalculatorKeyWrapper>
+      <CalculatorKeyWrapper span={3}>
         <OkButton />
-      </div>
+      </CalculatorKeyWrapper>
     </div>
   );
 };
