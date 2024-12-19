@@ -71,7 +71,7 @@ export const GameFinalModal = () => {
             )}
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter>
+        <DialogFooter className="flex flex-row justify-end gap-2">
           <Button type="button" disabled variant="secondary">
             Скачать отчет
           </Button>
