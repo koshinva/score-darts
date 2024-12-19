@@ -22,17 +22,18 @@ export const PlayerCard = (props: PlayerCardProps) => {
   const { id } = props;
 
   const player = useGameDartsStore((state) => state.players[id]);
+  const move = useGameDartsStore((state) => state.move);
 
   if (!player) {
     return null;
   }
 
   return (
-    <Card>
+    <Card className={cn('opacity-65', { 'opacity-100': move === id })}>
       <CardHeader className="text-center relative">
         <CardTitle>{player.name}</CardTitle>
         <CardDescription className="text-8xl font-semibold">{player.progress}</CardDescription>
-        <PlayerMoveIndicator id={id} />
+        <PlayerMoveIndicator type={move === id ? 'active' : undefined} />
         <Separator />
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-2 p-4 pt-0">
@@ -48,11 +49,10 @@ export const PlayerCard = (props: PlayerCardProps) => {
         <PlayerBadgeDetail title="сеты" value={player.setsWin} />
       </CardContent>
       <CardFooter className="p-4 pt-0 flex justify-end">
-        <PlayerBadgeDetail
-          title="последний ход"
-          value={last(player.legScores) ?? 0}
-          className="text-md"
-        />
+        <div className="flex items-center gap-1 text-sm">
+          <span>Последний ход:</span>
+          <span className="font-semibold">{last(player.legScores) ?? 0}</span>
+        </div>
       </CardFooter>
     </Card>
   );
@@ -68,8 +68,12 @@ const PlayerBadgeDetail = (props: PlayerBadgeDetailProps) => {
   const { title, value, className } = props;
 
   return (
-    <Badge variant="outline" className={cn('text-xs rounded-xl font-normal', className)}>
-      {title}:<span className="ml-1 font-bold">{value}</span>
+    <Badge
+      variant="secondary"
+      className={cn('text-xs rounded-md font-normal justify-between', className)}
+    >
+      <span className="mr-1 opacity-80">{title}:</span>
+      <span className="font-semibold">{value}</span>
     </Badge>
   );
 };
