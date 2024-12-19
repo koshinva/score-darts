@@ -21,4 +21,5 @@ export const initialGameDartsState: GameDartsState = {
   modCalculator: 'simple',
   scoreCalculator: null,
   isFinal: false,
+  report: null,
 };

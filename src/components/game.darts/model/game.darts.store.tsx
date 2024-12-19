@@ -8,6 +8,8 @@ import { parseMod } from '@/shared/helpers/parse.mod';
 import { StepsId } from '../types/steps.of.leg';
 import { PlayerId, PlayerStatus } from '../types/player.game.types';
 import { calculateWinner } from '../lib/calculate.winner';
+import { ReportPlayer } from '../types/report.type';
+import { each, mean } from 'lodash';
 
 const modeGameDartsStoreConfig = {
   root: 'game-darts',
@@ -179,6 +181,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
                     });
 
                     if (finalGame) {
+                      player.legsWin += 1;
                       player.setsWin += 1;
 
                       state.winners[state.sets.current].push(player.id);
@@ -208,6 +211,51 @@ export const useGameDartsStore = create<GameDartsStore>()(
             },
             undefined,
             modeGameDartsStoreConfig.generateNameAction('takeMove')
+          );
+        },
+
+        generateReport: () => {
+          set(
+            (state) => {
+              const repPlayers: ReportPlayer[] = [];
+
+              each(state.players, (player, id) => {
+                const repPlayer: ReportPlayer = {
+                  id,
+                  name: player.name,
+                  avgScore: mean(player.scores),
+                  maxScore: Math.max(...player.scores),
+                  winSets: player.setsWin,
+                  winLegs: player.legsWin,
+                };
+                repPlayers.push(repPlayer);
+              });
+
+              if (!state.sets.type) {
+                repPlayers.sort((a, b) => {
+                  if (b.winLegs === a.winLegs) {
+                    return b.avgScore - a.avgScore;
+                  }
+                  return b.winLegs - a.winLegs;
+                });
+              } else {
+                repPlayers.sort((a, b) => {
+                  if (b.winSets === a.winSets) {
+                    if (b.winLegs === a.winLegs) {
+                      return b.avgScore - a.avgScore;
+                    }
+                    return b.winLegs - a.winLegs;
+                  }
+                  return b.winSets - a.winSets;
+                });
+              }
+
+              state.report = {
+                players: repPlayers,
+              };
+            },
+            undefined,
+            modeGameDartsStoreConfig.generateNameAction('generateReport')
           );
         },
 

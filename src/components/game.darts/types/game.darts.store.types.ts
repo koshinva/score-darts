@@ -4,6 +4,7 @@ import { ModFinish } from '@/shared/settings/mod.finish.type';
 import { ModCalculator } from './calculator.types';
 import { StepsOfLeg } from './steps.of.leg';
 import { GameType } from '@/shared/settings/game.type';
+import { ReportType } from './report.type';
 
 export type GameDartsState = {
   initialized: boolean;
@@ -24,6 +25,7 @@ export type GameDartsState = {
   };
   winners: PlayerId[][];
   isFinal: boolean;
+  report: ReportType | null;
   modCalculator: ModCalculator;
   scoreCalculator: number | null;
 };
@@ -34,6 +36,7 @@ export type GameDartsActions = {
   setScoreCalculator: (value: number | string | null) => void;
   takeMove: (isBust?: boolean) => void;
   undoMove: () => void;
+  generateReport: () => void;
   reset: () => void;
 };
 
