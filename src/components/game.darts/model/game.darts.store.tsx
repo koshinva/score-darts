@@ -10,6 +10,7 @@ import { PlayerId, PlayerStatus } from '../types/player.game.types';
 import { calculateWinner } from '../lib/calculate.winner';
 import { ReportPlayer } from '../types/report.type';
 import { each, mean } from 'lodash';
+import { toasterOnWinLeg } from '../lib/toaster.on.win.leg';
 
 const modeGameDartsStoreConfig = {
   root: 'game-darts',
@@ -173,6 +174,8 @@ export const useGameDartsStore = create<GameDartsStore>()(
 
                 state.stepsOfLeg = [];
 
+                toasterOnWinLeg(`${player.name} - победитель!`);
+
                 const { final: finalSet } = calculateWinner({
                   current: state.legs.current,
                   playerWins: player.legsWin,
@@ -238,8 +241,8 @@ export const useGameDartsStore = create<GameDartsStore>()(
                 const repPlayer: ReportPlayer = {
                   id,
                   name: player.name,
-                  avgScore: mean(player.scores),
-                  maxScore: Math.max(...player.scores),
+                  avgScore: player.scores.length ? mean(player.scores) : 0,
+                  maxScore: player.scores.length ? Math.max(...player.scores) : 0,
                   winSets: player.setsWin,
                   winLegs: player.legsWin,
                 };
