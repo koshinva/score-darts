@@ -22,6 +22,8 @@ export type GameDartsState = {
     type: ModFinish | null;
     current: number;
   };
+  winners: PlayerId[][];
+  isFinal: boolean;
   modCalculator: ModCalculator;
   scoreCalculator: number | null;
 };

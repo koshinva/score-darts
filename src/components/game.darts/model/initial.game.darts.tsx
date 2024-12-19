@@ -16,7 +16,9 @@ export const initialGameDartsState: GameDartsState = {
     type: null,
     current: 0,
   },
+  winners: [[]],
   stepsOfLeg: [],
   modCalculator: 'simple',
   scoreCalculator: null,
+  isFinal: false,
 };

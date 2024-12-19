@@ -7,6 +7,7 @@ import { startPlayer } from './start.player';
 import { parseMod } from '@/shared/helpers/parse.mod';
 import { StepsId } from '../types/steps.of.leg';
 import { PlayerId, PlayerStatus } from '../types/player.game.types';
+import { calculateWinner } from '../lib/calculate.winner';
 
 const modeGameDartsStoreConfig = {
   root: 'game-darts',
@@ -45,6 +46,11 @@ export const useGameDartsStore = create<GameDartsStore>()(
 
               if (sets !== 'no') {
                 const { mod, value } = parseMod(sets);
+                const winners = [];
+                for (let i = 0; i < value; i++) {
+                  winners.push([]);
+                }
+                state.winners = winners;
                 state.sets = { current: 0, type: mod, total: value };
               }
 
@@ -148,31 +154,39 @@ export const useGameDartsStore = create<GameDartsStore>()(
                   state.players[id].progress = Number(state.type);
                 }
 
-                const currentLeg = state.legs.current + 1;
-                const selfLegsWin = state.players[player.id].legsWin + 1;
-                const totalLegs = state.legs.total;
-                const typeLegFinal = state.legs.type;
+                state.stepsOfLeg = [];
 
-                const bestWinOfLegs = currentLeg === totalLegs && typeLegFinal === 'bestOf';
-                const firstWinOfLegs = selfLegsWin === totalLegs && typeLegFinal === 'firstOf';
+                const { final: finalSet } = calculateWinner({
+                  current: state.legs.current,
+                  playerWins: player.legsWin,
+                  total: state.legs.total,
+                  type: state.legs.type,
+                });
 
-                if (bestWinOfLegs || firstWinOfLegs) {
+                if (finalSet) {
                   if (state.sets.type === null) {
-                    Object.assign(state, initialGameDartsState);
-                    return;
+                    player.legsWin += 1;
+
+                    state.winners[state.sets.current].push(player.id);
+
+                    state.isFinal = true;
                   } else {
-                    const currentSet = state.sets.current + 1;
-                    const selfSetsWin = state.players[player.id].setsWin + 1;
-                    const totalSets = state.sets.total;
-                    const typeSetFinal = state.sets.type;
+                    const { final: finalGame } = calculateWinner({
+                      current: state.sets.current,
+                      playerWins: player.setsWin,
+                      total: state.sets.total,
+                      type: state.sets.type,
+                    });
 
-                    const bestWinOfSets = currentSet === totalSets && typeSetFinal === 'bestOf';
-                    const firstWinOfSets = selfSetsWin === totalSets && typeSetFinal === 'firstOf';
+                    if (finalGame) {
+                      player.setsWin += 1;
 
-                    if (bestWinOfSets || firstWinOfSets) {
-                      Object.assign(state, initialGameDartsState);
-                      return;
+                      state.winners[state.sets.current].push(player.id);
+
+                      state.isFinal = true;
                     } else {
+                      state.winners[state.sets.current].push(player.id);
+
                       state.sets.current += 1;
                       player.setsWin += 1;
 
@@ -185,6 +199,9 @@ export const useGameDartsStore = create<GameDartsStore>()(
                 } else {
                   state.legs.current += 1;
                   player.legsWin += 1;
+
+                  state.winners[state.sets.current].push(player.id);
+
                   state.move = player.id;
                 }
               }
