@@ -47,12 +47,18 @@ export const GameFinalModal = () => {
                     <div key={player.id} className="px-2 flex flex-col gap-2">
                       <div className="flex items-center gap-2">
                         <p className="text-base font-semibold">{player.name}</p>
-                        {index === 0 && <BicepsFlexedIcon size={18} className="stroke-success animate-bounce" />}
+                        {index === 0 && (
+                          <BicepsFlexedIcon size={18} className="stroke-success animate-bounce" />
+                        )}
                       </div>
-                      <ReportRow label="Выигранные партии" value={player.winLegs} />
-                      <ReportRow label="Выигранные сеты" value={player.winSets} />
-                      <ReportRow label="Лучший результат" value={player.maxScore} />
-                      <ReportRow label="Средний результат" value={player.avgScore.toFixed(2)} />
+                      <ReportRow label="Выигранные партии" key="winLegs" value={player.winLegs} />
+                      <ReportRow label="Выигранные сеты" key="winSets" value={player.winSets} />
+                      <ReportRow label="Лучший результат" key="maxScore" value={player.maxScore} />
+                      <ReportRow
+                        label="Средний результат"
+                        key="avgScore"
+                        value={player.avgScore.toFixed(2)}
+                      />
                     </div>
                     {index !== report.players.length - 1 && <Separator />}
                   </>
