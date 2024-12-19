@@ -7,7 +7,8 @@ export const ToggleMod = () => {
 
   return (
     <Button
-      className="w-full h-full bg-accent rounded-none [&_svg]:size-6 text-accent-foreground hover:text-background"
+      size="full"
+      className="bg-accent rounded-none [&_svg]:size-6 text-accent-foreground hover:text-background"
       onClick={toggleModCalculator}
     >
       <RadicalIcon />

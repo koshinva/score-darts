@@ -6,7 +6,9 @@ export const ClearScoreButton = () => {
 
   return (
     <Button
-      className="w-full h-full bg-warning rounded-none [&_svg]:size-6 text-warning-foreground hover:text-background text-lg"
+      variant="warning"
+      size="full"
+      className="rounded-none [&_svg]:size-6 text-xl"
       onClick={() => setScoreCalculator(null)}
     >
       Очистить

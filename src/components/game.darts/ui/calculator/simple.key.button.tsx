@@ -12,7 +12,8 @@ export const SimpleKeyButton = (props: SimpleKeyButtonProps) => {
 
   return (
     <Button
-      className="w-full h-full bg-accent rounded-none [&_svg]:size-6 text-accent-foreground hover:text-background text-lg"
+      size="full"
+      className="bg-accent rounded-none [&_svg]:size-6 text-accent-foreground hover:text-background text-lg"
       onClick={() => setScoreCalculator(value)}
     >
       {value}

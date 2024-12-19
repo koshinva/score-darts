@@ -6,7 +6,7 @@ export const UndoButton = () => {
   const undoMove = useGameDartsStore((state) => state.undoMove);
 
   return (
-    <Button className="w-full h-full bg-destructive rounded-none [&_svg]:size-6" onClick={undoMove}>
+    <Button size="full" className="bg-destructive rounded-none [&_svg]:size-6" onClick={undoMove}>
       <UndoIcon className="stroke-background" />
     </Button>
   );
