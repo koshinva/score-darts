@@ -12,7 +12,7 @@ export const OkButton = () => {
       variant="success"
       size="full"
       className="rounded-none [&_svg]:size-6 text-xl"
-      onClick={() => takeMove()}
+      onClick={() => takeMove({})}
     >
       <SendHorizonalIcon />
     </Button>

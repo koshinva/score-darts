@@ -28,17 +28,17 @@ export const SimpleCalculator = () => {
       </CalculatorKeyWrapper>
       {Array.from({ length: 8 }, (_, i) => (
         <CalculatorKeyWrapper key={i} span={3}>
-          <SimpleKeyButton value={i + 1} />
+          <SimpleKeyButton value={i + 1} type="simple" />
         </CalculatorKeyWrapper>
       ))}
       <CalculatorKeyWrapper span={3}>
         <ClearScoreButton />
       </CalculatorKeyWrapper>
       <CalculatorKeyWrapper span={3}>
-        <SimpleKeyButton value={9} />
+        <SimpleKeyButton value={9} type="simple" />
       </CalculatorKeyWrapper>
       <CalculatorKeyWrapper span={3}>
-        <SimpleKeyButton value={0} />
+        <SimpleKeyButton value={0} type="simple" />
       </CalculatorKeyWrapper>
       <CalculatorKeyWrapper span={3}>
         <OkButton />

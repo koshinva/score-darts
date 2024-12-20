@@ -5,11 +5,12 @@ import { UndoIcon } from 'lucide-react';
 export const UndoButton = () => {
   const undoMove = useGameDartsStore((state) => state.undoMove);
   const stepsOfLeg = useGameDartsStore((state) => state.stepsOfLeg);
+  const dss = useGameDartsStore((state) => state.calculator.dss);
 
   return (
     <Button
       size="full"
-      disabled={stepsOfLeg.length === 0}
+      disabled={stepsOfLeg.length === 0 || dss.some((ds) => ds !== null)}
       className="bg-destructive rounded-none [&_svg]:size-6 text-destructive-foreground"
       onClick={undoMove}
     >

@@ -10,7 +10,7 @@ export const BustButton = () => {
       variant="warning"
       size="full"
       className="rounded-none [&_svg]:size-6 text-xl"
-      onClick={() => takeMove(true)}
+      onClick={() => takeMove({ isBust: true })}
     >
       <BombIcon />
     </Button>
