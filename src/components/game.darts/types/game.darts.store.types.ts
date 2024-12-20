@@ -1,7 +1,7 @@
 import { GameFormType } from '@/components/game.form/model/schema';
 import { PlayerId, PlayerStatus } from './player.game.types';
 import { ModFinish } from '@/shared/settings/mod.finish.type';
-import { ModCalculator } from './calculator.types';
+import { ModeCalculator, MultiplyCalculator } from './calculator.types';
 import { StepsOfLeg } from './steps.of.leg';
 import { GameType } from '@/shared/settings/game.type';
 import { ReportType } from './report.type';
@@ -26,8 +26,11 @@ export type GameDartsState = {
   winners: PlayerId[][];
   isFinal: boolean;
   report: ReportType | null;
-  modCalculator: ModCalculator;
-  scoreCalculator: number | null;
+  score: number | null;
+  calculator: {
+    mode: ModeCalculator;
+    multiply: MultiplyCalculator;
+  };
 };
 
 export type GameDartsActions = {
@@ -37,6 +40,7 @@ export type GameDartsActions = {
   takeMove: (isBust?: boolean) => void;
   undoMove: () => void;
   generateReport: () => void;
+  changeMultiply: (value: MultiplyCalculator) => void;
   reset: () => void;
 };
 

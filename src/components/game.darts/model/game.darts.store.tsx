@@ -95,7 +95,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
         toggleModCalculator: () => {
           set(
             (state) => {
-              state.modCalculator = state.modCalculator === 'simple' ? 'advanced' : 'simple';
+              state.calculator.mode = state.calculator.mode === 'simple' ? 'advanced' : 'simple';
             },
             undefined,
             modeGameDartsStoreConfig.generateNameAction('toggleModCalculator')
@@ -106,15 +106,15 @@ export const useGameDartsStore = create<GameDartsStore>()(
           set(
             (state) => {
               if (value === null) {
-                state.scoreCalculator = null;
+                state.score = null;
                 return;
               }
-              const current = (state.scoreCalculator ?? '').toString();
+              const current = (state.score ?? '').toString();
               const modify = Number(current + value.toString());
               if (modify > 180) {
                 return;
               }
-              state.scoreCalculator = modify;
+              state.score = modify;
             },
             undefined,
             modeGameDartsStoreConfig.generateNameAction('setScoreCalculator')
@@ -125,13 +125,13 @@ export const useGameDartsStore = create<GameDartsStore>()(
           set(
             (state) => {
               const player = state.players[state.move ?? ''];
-              const score = isBust ? 9999 : state.scoreCalculator;
+              const score = isBust ? 9999 : state.score;
 
               if (!player || score === null) return;
 
               const diff = player.progress - score;
 
-              state.scoreCalculator = null;
+              state.score = null;
 
               const stepId = crypto.randomUUID() as StepsId;
               state.stepsOfLeg.push({
@@ -274,6 +274,16 @@ export const useGameDartsStore = create<GameDartsStore>()(
             },
             undefined,
             modeGameDartsStoreConfig.generateNameAction('generateReport')
+          );
+        },
+
+        changeMultiply: (value) => {
+          set(
+            (state) => {
+              state.calculator.multiply = value;
+            },
+            undefined,
+            modeGameDartsStoreConfig.generateNameAction('changeMultiply')
           );
         },
 

@@ -18,8 +18,11 @@ export const initialGameDartsState: GameDartsState = {
   },
   winners: [[]],
   stepsOfLeg: [],
-  modCalculator: 'simple',
-  scoreCalculator: null,
+  score: null,
+  calculator: {
+    mode: 'simple',
+    multiply: 1,
+  },
   isFinal: false,
   report: null,
 };

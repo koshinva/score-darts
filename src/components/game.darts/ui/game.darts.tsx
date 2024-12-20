@@ -5,12 +5,12 @@ import { GameFinalModal } from './game.final.modal';
 const GameDarts = () => {
   return (
     <>
-      <div className="w-full h-full flex items-center justify-center bg-primary-foreground">
+      <div className="w-full h-full bg-primary-foreground">
         <div className="flex flex-col h-full items-center">
           <div className="w-[min(90vw,800px)] flex-1 p-4">
             <GamePlace />
           </div>
-          <div className="w-[min(90vw,800px)] max-md:w-full">
+          <div className="w-[min(90vw,800px)] max-md:w-[min(95vw,800px)]">
             <Calculator />
           </div>
         </div>
