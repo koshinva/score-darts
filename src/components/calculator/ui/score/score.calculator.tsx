@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { useGameDartsStore } from '../../model/game.darts.store';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
 import { EllipsisIcon } from 'lucide-react';
 
 export const ScoreCalculator = () => {

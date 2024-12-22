@@ -1,6 +1,6 @@
+import { GameCalculator } from '@/components/calculator';
 import { GamePlace } from './game.place';
-import Calculator from './calculator/calculator';
-import { GameFinalModal } from './game.final.modal';
+import { GameFinalModal } from '@/components/game.final';
 
 const GameDarts = () => {
   return (
@@ -11,7 +11,7 @@ const GameDarts = () => {
             <GamePlace />
           </div>
           <div className="w-[min(90vw,800px)] max-md:w-[min(95vw,800px)]">
-            <Calculator />
+            <GameCalculator />
           </div>
         </div>
       </div>

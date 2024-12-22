@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button';
-import { useGameDartsStore } from '../../model/game.darts.store';
-import { ModeCalculator } from '../../types/calculator.types';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
+import { ModeCalculator } from '@/shared/types/calculator.types';
 
-type SimpleKeyButtonProps = {
+type PrimitiveKeyButtonProps = {
   value: string | number;
   type: ModeCalculator;
 };
 
-export const SimpleKeyButton = (props: SimpleKeyButtonProps) => {
+export const PrimitiveKeyButton = (props: PrimitiveKeyButtonProps) => {
   const { value, type } = props;
 
   const setScoreCalculator = useGameDartsStore((state) => state.setScoreCalculator);

@@ -2,7 +2,7 @@ import { BoltIcon } from 'lucide-react';
 import { ToggleTheme } from './toggle.theme';
 import { ResetGame } from './reset.game';
 import { HintGame } from './hint.game';
-import { useGameDartsStore } from '@/components/game.darts';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
 
 export const Header = () => {
   const initialized = useGameDartsStore((state) => state.initialized);

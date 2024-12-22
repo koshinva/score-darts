@@ -1,17 +1,17 @@
 import { create } from 'zustand';
-import { GameDartsStore } from '../types/game.darts.store.types';
+import { GameDartsStore } from './types/game.darts.store.types';
 import { immer } from 'zustand/middleware/immer';
 import { persist, devtools } from 'zustand/middleware';
-import { initialGameDartsState } from './initial.game.darts';
-import { startPlayer } from './start.player';
 import { parseMod } from '@/shared/helpers/parse.mod';
-import { StepsId } from '../types/steps.of.leg';
-import { PlayerId, PlayerStatus } from '../types/player.game.types';
-import { calculateWinner } from '../lib/calculate.winner';
-import { ReportPlayer } from '../types/report.type';
+import { calculateWinner } from './lib/calculate.winner';
 import { each, mean } from 'lodash';
-import { toasterOnWinLeg } from '../lib/toaster.on.win.leg';
-import { toasterWarning } from '../lib/toaster.warning';
+import { toasterOnWinLeg } from './lib/toaster.on.win.leg';
+import { toasterWarning } from './lib/toaster.warning';
+import { initialGameDartsState } from './lib/initial.game.darts';
+import { PlayerId, PlayerStatus } from '../types/player.game.types';
+import { startPlayer } from './lib/start.player';
+import { ReportPlayer } from '../types/report.type';
+import { StepsId } from '../types/steps.of.leg';
 
 const modeGameDartsStoreConfig = {
   root: 'game-darts',

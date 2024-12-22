@@ -1,10 +1,10 @@
 import { GameFormType } from '@/components/game.form/model/schema';
-import { PlayerId, PlayerStatus } from './player.game.types';
 import { ModFinish } from '@/shared/settings/mod.finish.type';
-import { DssCalculator, ModeCalculator, MultiplyCalculator } from './calculator.types';
-import { StepsOfLeg } from './steps.of.leg';
 import { GameType } from '@/shared/settings/game.type';
-import { ReportType } from './report.type';
+import { PlayerId, PlayerStatus } from '@/shared/types/player.game.types';
+import { StepsOfLeg } from '@/shared/types/steps.of.leg';
+import { ReportType } from '@/shared/types/report.type';
+import { DssCalculator, ModeCalculator, MultiplyCalculator } from '@/shared/types/calculator.types';
 
 export type GameDartsState = {
   initialized: boolean;

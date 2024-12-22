@@ -1,6 +1,4 @@
 import { cn } from '@/lib/utils';
-import { useGameDartsStore } from '../model/game.darts.store';
-import { PlayerId } from '../types/player.game.types';
 import {
   Card,
   CardContent,
@@ -10,9 +8,12 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
 import { PlayerMoveIndicator } from './player.move.indicator';
-import { mean, last } from 'lodash';
+import { last } from 'lodash';
+import { PlayerId } from '@/shared/types/player.game.types';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
+import { PlayerBadgeDetail } from './player.badge.detail';
+import { getAverage } from '@/shared/helpers/get.average';
 
 type PlayerCardProps = {
   id: PlayerId;
@@ -27,6 +28,13 @@ export const PlayerCard = (props: PlayerCardProps) => {
   if (!player) {
     return null;
   }
+
+  const details = [
+    { title: 'среднее', value: getAverage(player.scores, 2) },
+    { title: 'среднее (раунд)', value: getAverage(player.legScores, 2) },
+    { title: 'партии', value: player.legsWin },
+    { title: 'сеты', value: player.setsWin },
+  ];
 
   return (
     <Card
@@ -53,16 +61,9 @@ export const PlayerCard = (props: PlayerCardProps) => {
           'max-md:hidden': move !== id,
         })}
       >
-        <PlayerBadgeDetail
-          title="среднее"
-          value={(player.scores.length > 0 ? mean(player.scores) : 0).toFixed(2)}
-        />
-        <PlayerBadgeDetail
-          title="среднее (раунд)"
-          value={(player.legScores.length > 0 ? mean(player.legScores) : 0).toFixed(2)}
-        />
-        <PlayerBadgeDetail title="партии" value={player.legsWin} />
-        <PlayerBadgeDetail title="сеты" value={player.setsWin} />
+        {details.map((detail) => (
+          <PlayerBadgeDetail key={detail.title} title={detail.title} value={detail.value} />
+        ))}
       </CardContent>
       <CardFooter className={cn('p-4 pt-0 flex justify-end ', { 'max-md:hidden': move !== id })}>
         <div className="flex items-center gap-1 text-sm">
@@ -71,28 +72,5 @@ export const PlayerCard = (props: PlayerCardProps) => {
         </div>
       </CardFooter>
     </Card>
-  );
-};
-
-type PlayerBadgeDetailProps = {
-  title: string;
-  value: string | number;
-  className?: string;
-};
-
-const PlayerBadgeDetail = (props: PlayerBadgeDetailProps) => {
-  const { title, value, className } = props;
-
-  return (
-    <Badge
-      variant="secondary"
-      className={cn(
-        'text-xs rounded-md font-normal justify-between max-md:flex-col max-md:gap-0',
-        className
-      )}
-    >
-      <span className="mr-1 opacity-80">{title}:</span>
-      <span className="font-semibold">{value}</span>
-    </Badge>
   );
 };

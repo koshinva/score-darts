@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { useGameDartsStore } from '../../model/game.darts.store';
-import { MultiplyCalculator } from '../../types/calculator.types';
 import { cn } from '@/lib/utils';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
+import { MultiplyCalculator } from '@/shared/types/calculator.types';
 
 type ToggleMultiplyProps = {
   multiply: MultiplyCalculator;

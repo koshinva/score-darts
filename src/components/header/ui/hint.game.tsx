@@ -17,6 +17,7 @@ import {
   UndoIcon,
   XIcon,
 } from 'lucide-react';
+import React from 'react';
 
 const hints = [
   { icon: XIcon, description: 'Очистить текущий ход', className: 'bg-warning' },
@@ -41,8 +42,8 @@ export const HintGame = () => {
             <DialogDescription>
               <div className="flex flex-col gap-2">
                 {hints.map(({ icon: Icon, description, className }, index) => (
-                  <>
-                    <div key={index} className="flex items-center gap-2 text-sm">
+                  <React.Fragment key={index}>
+                    <div className="flex items-center gap-2 text-sm">
                       <div
                         className={cn('flex items-center justify-center p-1 rounded-sm', className)}
                       >
@@ -51,7 +52,7 @@ export const HintGame = () => {
                       <p>{description}</p>
                     </div>
                     {index !== hints.length - 1 && <Separator />}
-                  </>
+                  </React.Fragment>
                 ))}
               </div>
             </DialogDescription>

@@ -1,6 +1,5 @@
-import { useGameDartsStore } from '../../model/game.darts.store';
 import { cn } from '@/lib/utils';
-import { CalculatorKeyWrapper } from './calculator.key.wrapper';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
 
 export const DsScores = () => {
   const dss = useGameDartsStore((state) => state.calculator.dss);
@@ -8,7 +7,7 @@ export const DsScores = () => {
   const fillIndex = dss.filter((ds) => ds !== null).length;
 
   return dss.map((ds, index) => (
-    <CalculatorKeyWrapper span={3}>
+    <div className="grid grid-cols-3">
       <div key={index} className="w-full h-full bg-accent flex gap-2 items-center justify-center ">
         <span className="text-xs text-muted-foreground">d{index + 1}</span>
         <p
@@ -19,6 +18,6 @@ export const DsScores = () => {
           {ds ?? 0}
         </p>
       </div>
-    </CalculatorKeyWrapper>
+    </div>
   ));
 };

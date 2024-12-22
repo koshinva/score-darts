@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Fallback } from '../ui/fallback.ui';
-import { useGameDartsStore } from '@/components/game.darts';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
 
 const logError = (error: Error, { componentStack }: React.ErrorInfo) => {
   console.error(error, componentStack);

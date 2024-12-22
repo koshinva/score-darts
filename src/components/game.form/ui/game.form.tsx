@@ -9,7 +9,7 @@ import { GameFormContainer } from './game.form.container';
 import { GameSetsSelect } from './game.sets.select';
 import { GameLegsSelect } from './game.legs.select';
 import { GamePlayersFields } from './game.players.fields';
-import { useGameDartsStore } from '@/components/game.darts';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
 
 const GameForm = () => {
   const initGame = useGameDartsStore((state) => state.initGame);

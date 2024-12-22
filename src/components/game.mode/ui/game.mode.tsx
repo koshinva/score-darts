@@ -1,6 +1,7 @@
 import { GameForm } from '@/components/game.form';
-import { GameDarts, useGameDartsStore } from '@/components/game.darts';
+import { GameDarts } from '@/components/game.darts';
 import { Header } from '@/components/header';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
 
 const GameMode = () => {
   const initialized = useGameDartsStore((state) => state.initialized);

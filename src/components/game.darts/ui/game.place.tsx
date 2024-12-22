@@ -1,5 +1,5 @@
-import { useGameDartsStore } from '../model/game.darts.store';
-import { PlayerCard } from './player.card';
+import { PlayerCard } from '@/components/player.card';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
 
 export const GamePlace = () => {
   const players = useGameDartsStore((state) => state.players);

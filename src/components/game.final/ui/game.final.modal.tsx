@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useGameDartsStore } from '../model/game.darts.store';
 import {
   Dialog,
   DialogClose,
@@ -12,6 +11,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { BicepsFlexedIcon, Loader2Icon } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
+import { ReportRow } from '@/shared/ui/report.row';
 
 export const GameFinalModal = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -85,20 +86,3 @@ export const GameFinalModal = () => {
     </Dialog>
   );
 };
-
-type ReportRowProps = {
-  label: string;
-  value: string | number;
-};
-
-function ReportRow(props: ReportRowProps) {
-  const { label, value } = props;
-
-  return (
-    <div className="flex items-end gap-1">
-      <p className="leading-none">{label}</p>
-      <div className="border-b border-dashed border-border flex-1" />
-      <p className="leading-none">{value}</p>
-    </div>
-  );
-}

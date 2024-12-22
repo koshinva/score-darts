@@ -1,4 +1,3 @@
-import { useGameDartsStore } from '@/components/game.darts';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -10,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { useGameDartsStore } from '@/shared/store/game.darts.store';
 import { LogOutIcon } from 'lucide-react';
 
 export const ResetGame = () => {
