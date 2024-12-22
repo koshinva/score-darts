@@ -65,7 +65,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               state.initialized = true;
             },
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('initGame')
+            modeGameDartsStoreConfig.generateNameAction('initGame'),
           );
         },
         undoMove: () => {
@@ -89,7 +89,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               state.move = playerId;
             },
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('undoMove')
+            modeGameDartsStoreConfig.generateNameAction('undoMove'),
           );
         },
 
@@ -115,7 +115,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               }
             },
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('toggleModCalculator')
+            modeGameDartsStoreConfig.generateNameAction('toggleModCalculator'),
           );
         },
 
@@ -130,7 +130,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               state.score = modify;
             },
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('setScoreCalculator')
+            modeGameDartsStoreConfig.generateNameAction('setScoreCalculator'),
           );
         },
 
@@ -155,7 +155,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               }
             },
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('clearScoreCalculator')
+            modeGameDartsStoreConfig.generateNameAction('clearScoreCalculator'),
           );
         },
 
@@ -282,7 +282,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               }
             },
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('takeMove')
+            modeGameDartsStoreConfig.generateNameAction('takeMove'),
           );
         },
 
@@ -327,7 +327,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               };
             },
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('generateReport')
+            modeGameDartsStoreConfig.generateNameAction('generateReport'),
           );
         },
 
@@ -337,7 +337,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               state.calculator.multiply = value;
             },
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('changeMultiply')
+            modeGameDartsStoreConfig.generateNameAction('changeMultiply'),
           );
         },
 
@@ -384,7 +384,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               }
             },
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('updateDss')
+            modeGameDartsStoreConfig.generateNameAction('updateDss'),
           );
 
           return resultUpdate;
@@ -394,16 +394,16 @@ export const useGameDartsStore = create<GameDartsStore>()(
           set(
             initialGameDartsState,
             undefined,
-            modeGameDartsStoreConfig.generateNameAction('reset')
+            modeGameDartsStoreConfig.generateNameAction('reset'),
           );
         },
       })),
       {
         name: modeGameDartsStoreConfig.root,
-      }
+      },
     ),
     {
       name: modeGameDartsStoreConfig.root,
-    }
-  )
+    },
+  ),
 );

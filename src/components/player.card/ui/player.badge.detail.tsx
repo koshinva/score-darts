@@ -15,7 +15,7 @@ export const PlayerBadgeDetail = (props: PlayerBadgeDetailProps) => {
       variant="secondary"
       className={cn(
         'text-xs rounded-md font-normal justify-between max-md:flex-col max-md:gap-0',
-        className
+        className,
       )}
     >
       <span className="mr-1 opacity-80">{title}:</span>

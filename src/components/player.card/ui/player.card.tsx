@@ -49,7 +49,9 @@ export const PlayerCard = (props: PlayerCardProps) => {
       >
         <CardTitle className={cn({ 'max-md:text-xl': move !== id })}>{player.name}</CardTitle>
         <CardDescription
-          className={cn('text-8xl font-semibold', { 'max-md:text-2xl': move !== id })}
+          className={cn('text-8xl font-semibold', {
+            'max-md:text-2xl': move !== id,
+          })}
         >
           {player.progress}
         </CardDescription>
@@ -65,7 +67,11 @@ export const PlayerCard = (props: PlayerCardProps) => {
           <PlayerBadgeDetail key={detail.title} title={detail.title} value={detail.value} />
         ))}
       </CardContent>
-      <CardFooter className={cn('p-4 pt-0 flex justify-end ', { 'max-md:hidden': move !== id })}>
+      <CardFooter
+        className={cn('p-4 pt-0 flex justify-end ', {
+          'max-md:hidden': move !== id,
+        })}
+      >
         <div className="flex items-center gap-1 text-sm">
           <span>Последний ход:</span>
           <span className="font-semibold">{last(player.legScores) ?? 0}</span>

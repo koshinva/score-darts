@@ -21,11 +21,31 @@ import React from 'react';
 
 const hints = [
   { icon: XIcon, description: 'Очистить текущий ход', className: 'bg-warning' },
-  { icon: BombIcon, description: 'Перебор в текущий ход', className: 'bg-warning' },
-  { icon: UndoIcon, description: 'Отменить последний ход', className: 'bg-destructive' },
-  { icon: SendHorizonalIcon, description: 'Отправить результат', className: 'bg-success' },
-  { icon: RadicalIcon, description: 'Переключить режим калькулятора', className: '' },
-  { icon: KeyboardIcon, description: 'Горячие клавиши (в разработке)', className: 'opacity-30' },
+  {
+    icon: BombIcon,
+    description: 'Перебор в текущий ход',
+    className: 'bg-warning',
+  },
+  {
+    icon: UndoIcon,
+    description: 'Отменить последний ход',
+    className: 'bg-destructive',
+  },
+  {
+    icon: SendHorizonalIcon,
+    description: 'Отправить результат',
+    className: 'bg-success',
+  },
+  {
+    icon: RadicalIcon,
+    description: 'Переключить режим калькулятора',
+    className: '',
+  },
+  {
+    icon: KeyboardIcon,
+    description: 'Горячие клавиши (в разработке)',
+    className: 'opacity-30',
+  },
 ];
 
 export const HintGame = () => {

@@ -9,7 +9,9 @@ export const PlayerMoveIndicator = (props: PlayerMoveIndicatorProps) => {
 
   return (
     <span
-      className={cn('absolute flex size-3 top-0 left-1.5', { 'max-md:hidden': type !== 'active' })}
+      className={cn('absolute flex size-3 top-0 left-1.5', {
+        'max-md:hidden': type !== 'active',
+      })}
     >
       <span
         className={cn('absolute inline-flex h-full w-full rounded-full bg-gray-500 opacity-75', {

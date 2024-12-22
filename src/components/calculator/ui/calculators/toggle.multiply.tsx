@@ -17,7 +17,7 @@ export const ToggleMultiply = (props: ToggleMultiplyProps) => {
       size="full"
       className={cn(
         'bg-accent rounded-none [&_svg]:size-6 text-accent-foreground hover:text-background text-lg',
-        { 'bg-card': multiply === multiplyStore }
+        { 'bg-card': multiply === multiplyStore },
       )}
       onClick={() => changeMultiply(multiply)}
     >

@@ -1,4 +1,4 @@
-import { PlayerId, PlayerStatus } from "@/shared/types/player.game.types";
+import { PlayerId, PlayerStatus } from '@/shared/types/player.game.types';
 
 export const startPlayer = (name: string, progress: number): PlayerStatus => {
   const id = crypto.randomUUID() as PlayerId;
