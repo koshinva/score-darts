@@ -27,7 +27,7 @@ const keysAdvancedCalculator = [
 
 export const AdvancedCalculator = () => {
   return (
-    <div className="grid grid-cols-12 grid-rows-[60px,80px,repeat(4,60px)]">
+    <div className="grid grid-cols-12 grid-rows-[60px,80px,repeat(4,60px)] max-sm:grid-rows-[45px,60px,repeat(4,45px)]">
       {keysAdvancedCalculator.map(({ component, span }, index) => (
         <CalculatorKeyWrapper key={index} span={span}>
           {component}

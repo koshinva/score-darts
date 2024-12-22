@@ -6,18 +6,23 @@ export const DsScores = () => {
 
   const fillIndex = dss.filter((ds) => ds !== null).length;
 
-  return dss.map((ds, index) => (
-    <div className="grid grid-cols-3">
-      <div key={index} className="w-full h-full bg-accent flex gap-2 items-center justify-center ">
-        <span className="text-xs text-muted-foreground">d{index + 1}</span>
-        <p
-          className={cn('text-lg text-muted-foreground', {
-            'text-primary': fillIndex === index,
-          })}
+  return (
+    <div className="grid grid-cols-3 h-full w-full">
+      {dss.map((ds, index) => (
+        <div
+          key={index}
+          className="w-full h-full bg-accent flex gap-2 items-center justify-center "
         >
-          {ds ?? 0}
-        </p>
-      </div>
+          <span className="text-xs text-muted-foreground">d{index + 1}</span>
+          <p
+            className={cn('text-lg text-muted-foreground', {
+              'text-primary': fillIndex === index,
+            })}
+          >
+            {ds ?? 0}
+          </p>
+        </div>
+      ))}
     </div>
-  ));
+  );
 };

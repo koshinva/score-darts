@@ -15,6 +15,7 @@ export const CalculatorKeyWrapper = (props: CalculatorKeyWrapperProps) => {
         'col-span-3': span === 3,
         'col-span-4': span === 4,
         'col-span-6': span === 6,
+        'col-span-9': span === 9,
       })}
     >
       {children}

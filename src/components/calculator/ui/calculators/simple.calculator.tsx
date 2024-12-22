@@ -21,7 +21,7 @@ const keysSimpleCalculator = [
 
 export const SimpleCalculator = () => {
   return (
-    <div className="grid grid-cols-12 grid-rows-[80px,repeat(3,100px)]">
+    <div className="grid grid-cols-12 grid-rows-[80px,repeat(3,100px)] max-sm:grid-rows-[60px,repeat(3,75px)]">
       {keysSimpleCalculator.map(({ component, span }, index) => (
         <CalculatorKeyWrapper key={index} span={span}>
           {component}
