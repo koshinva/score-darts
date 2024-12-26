@@ -12,6 +12,7 @@ import { PlayerId, PlayerStatus } from '../types/player.game.types';
 import { startPlayer } from './lib/start.player';
 import { ReportPlayer } from '../types/report.type';
 import { StepId } from '../types/steps.of.leg';
+import { diapasons } from './lib/report.chart';
 
 const modeGameDartsStoreConfig = {
   root: 'game-darts',
@@ -285,6 +286,14 @@ export const useGameDartsStore = create<GameDartsStore>()(
               const repPlayers: ReportPlayer[] = [];
 
               each(state.players, (player, id) => {
+                const chart = diapasons.map((diapason) => {
+                  const { label, condition } = diapason;
+                  return {
+                    diapason: label,
+                    count: player.scores.filter((s) => s >= condition[0] && s <= condition[1])
+                      .length,
+                  };
+                });
                 const repPlayer: ReportPlayer = {
                   id,
                   name: player.name,
@@ -292,6 +301,10 @@ export const useGameDartsStore = create<GameDartsStore>()(
                   maxScore: player.scores.length ? Math.max(...player.scores) : 0,
                   winSets: player.setsWin,
                   winLegs: player.legsWin,
+                  maxDs: player.dss.length ? Math.max(...player.dss) : null,
+                  avgDs: player.dss.length ? mean(player.dss) : null,
+                  countStep: player.scores.length,
+                  chart,
                 };
                 repPlayers.push(repPlayer);
               });
