@@ -11,7 +11,7 @@ import { initialGameDartsState } from './lib/initial.game.darts';
 import { PlayerId, PlayerStatus } from '../types/player.game.types';
 import { startPlayer } from './lib/start.player';
 import { ReportPlayer } from '../types/report.type';
-import { StepsId } from '../types/steps.of.leg';
+import { StepId } from '../types/steps.of.leg';
 
 const modeGameDartsStoreConfig = {
   root: 'game-darts',
@@ -99,9 +99,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
               const newMode = state.calculator.mode === 'simple' ? 'advanced' : 'simple';
               state.calculator.mode = newMode;
               if (newMode === 'simple') {
-                const sumDds = state.calculator.dss
-                  .filter((ds) => ds !== null)
-                  .reduce((a, b) => a + b, 0);
+                const sumDds = state.calculator.dss.reduce((a, b) => a + b, 0);
 
                 const player = state.players[state.move ?? ''];
 
@@ -109,7 +107,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
                   player.progress += sumDds;
                 }
 
-                state.calculator.dss = [null, null, null];
+                state.calculator.dss = [];
               } else {
                 state.score = null;
               }
@@ -140,17 +138,12 @@ export const useGameDartsStore = create<GameDartsStore>()(
               if (state.calculator.mode === 'simple') {
                 state.score = null;
               } else {
-                const sumDds = state.calculator.dss
-                  .filter((ds) => ds !== null)
-                  .reduce((a, b) => a + b, 0);
+                const sumDds = state.calculator.dss.reduce((a, b) => a + b, 0);
+                state.calculator.dss = [];
 
-                state.calculator.dss = [null, null, null];
-
-                if (sumDds > 0) {
-                  const player = state.players[state.move ?? ''];
-                  if (player) {
-                    player.progress += sumDds;
-                  }
+                const player = state.players[state.move ?? ''];
+                if (sumDds > 0 && player) {
+                  player.progress += sumDds;
                 }
               }
             },
@@ -162,42 +155,45 @@ export const useGameDartsStore = create<GameDartsStore>()(
         takeMove: (args) => {
           set(
             (state) => {
-              const { isBust, dss } = args;
+              const { isBust, isDss } = args;
 
               const player = state.players[state.move ?? ''];
               let score = state.score;
 
+              const sumDds = state.calculator.dss.reduce((a, b) => a + b, 0);
+
               if (isBust) {
                 score = 9999;
-
-                const sumDds = state.calculator.dss
-                  .filter((ds) => ds !== null)
-                  .reduce((a, b) => a + b, 0);
-
                 if (sumDds > 0 && player) {
                   player.progress += sumDds;
                 }
-              } else if (dss !== undefined) {
-                score = dss;
+              } else if (isDss) {
+                score = sumDds;
               }
 
               if (!player || score === null) return;
 
               const diff = player.progress - score;
 
-              state.score = null;
-              state.calculator.dss = [null, null, null];
-
-              const stepId = crypto.randomUUID() as StepsId;
+              const stepId = crypto.randomUUID() as StepId;
               state.stepsOfLeg.push({
                 id: stepId,
                 playerId: player.id,
                 score: diff < 0 ? 0 : score,
+                dss: isDss ? state.calculator.dss : undefined,
               });
+
+              player.scores.push(diff < 0 ? 0 : score);
+
+              if (isDss) {
+                player.dss.push(...state.calculator.dss);
+              }
+
+              state.score = null;
+              state.calculator.dss = [];
 
               if (diff > 0) {
                 player.progress = diff;
-                player.scores.push(score);
                 player.legScores.push(score);
                 player.legSteps.push(stepId);
 
@@ -207,7 +203,6 @@ export const useGameDartsStore = create<GameDartsStore>()(
               }
 
               if (diff < 0) {
-                player.scores.push(0);
                 player.legScores.push(0);
                 player.legSteps.push(stepId);
                 state.move = state.order[player.id];
@@ -216,8 +211,6 @@ export const useGameDartsStore = create<GameDartsStore>()(
               }
 
               if (diff === 0) {
-                player.scores.push(score);
-
                 const playerIds = Object.keys(state.players);
 
                 for (const id of playerIds) {
@@ -342,7 +335,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
         },
 
         updateDss: (value) => {
-          let resultUpdate: number | undefined;
+          let takeMove;
 
           set(
             (state) => {
@@ -355,31 +348,20 @@ export const useGameDartsStore = create<GameDartsStore>()(
                 return;
               }
               const result = Number(value) * state.calculator.multiply;
-
-              const dss = [...state.calculator.dss];
-
-              const fillIndex = dss.filter((ds) => ds !== null).length;
-
-              const sumDssBeforeUpdate = dss.filter((ds) => ds !== null).reduce((a, b) => a + b, 0);
-
-              if (fillIndex < dss.length) {
-                dss[fillIndex] = result;
-              }
-
+              const sumDss = state.calculator.dss.reduce((a, b) => a + b, 0);
               const diff = player.progress - result;
-              const sumDss = (dss as number[]).reduce((a, b) => a + b, 0);
-              const allFill = dss.every((ds) => ds !== null);
 
-              if (allFill) {
-                player.progress += sumDssBeforeUpdate;
-                resultUpdate = sumDss;
+              state.calculator.dss.push(result);
+
+              if (state.calculator.dss.length === 3) {
+                player.progress += sumDss;
+                takeMove = true;
               } else {
                 if (diff > 0) {
                   player.progress = diff;
-                  state.calculator.dss[fillIndex] = result;
                 } else {
-                  player.progress += sumDssBeforeUpdate;
-                  resultUpdate = sumDss;
+                  player.progress += sumDss;
+                  takeMove = true;
                 }
               }
             },
@@ -387,7 +369,7 @@ export const useGameDartsStore = create<GameDartsStore>()(
             modeGameDartsStoreConfig.generateNameAction('updateDss'),
           );
 
-          return resultUpdate;
+          return Boolean(takeMove);
         },
 
         reset: () => {

@@ -18,9 +18,9 @@ export const PrimitiveKeyButton = (props: PrimitiveKeyButtonProps) => {
     if (type === 'simple') {
       setScoreCalculator(value);
     } else {
-      const result = updateDss(value);
-      if (result !== undefined) {
-        takeMove({ dss: result });
+      const isTakeMove = updateDss(value);
+      if (isTakeMove) {
+        takeMove({ isDss: isTakeMove });
       }
     }
   };

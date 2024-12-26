@@ -22,7 +22,7 @@ export const initialGameDartsState: GameDartsState = {
   calculator: {
     mode: 'simple',
     multiply: 1,
-    dss: [null, null, null],
+    dss: [],
   },
   isFinal: false,
   report: null,

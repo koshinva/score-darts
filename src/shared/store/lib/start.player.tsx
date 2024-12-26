@@ -7,6 +7,7 @@ export const startPlayer = (name: string, progress: number): PlayerStatus => {
     id,
     progress,
     scores: [],
+    dss: [],
     legScores: [],
     name,
     setsWin: 0,
