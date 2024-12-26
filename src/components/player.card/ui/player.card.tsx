@@ -14,6 +14,7 @@ import { PlayerId } from '@/shared/types/player.game.types';
 import { useGameDartsStore } from '@/shared/store/game.darts.store';
 import { PlayerBadgeDetail } from './player.badge.detail';
 import { getAverage } from '@/shared/helpers/get.average';
+import { TooltipPossibleOuts } from './tooltip.possible.outs';
 
 type PlayerCardProps = {
   id: PlayerId;
@@ -68,10 +69,11 @@ export const PlayerCard = (props: PlayerCardProps) => {
         ))}
       </CardContent>
       <CardFooter
-        className={cn('p-4 pt-0 flex justify-end ', {
+        className={cn('p-4 pt-0 flex justify-between', {
           'max-md:hidden': move !== id,
         })}
       >
+        <TooltipPossibleOuts progress={player.progress} />
         <div className="flex items-center gap-1 text-sm">
           <span>Последний ход:</span>
           <span className="font-semibold">{last(player.legScores) ?? 0}</span>
