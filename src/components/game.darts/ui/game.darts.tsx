@@ -5,7 +5,7 @@ import { GameFinalModal } from '@/components/game.final';
 const GameDarts = () => {
   return (
     <>
-      <div className="w-full h-full bg-primary-foreground">
+      <div className="w-full h-full bg-background">
         <div className="flex flex-col h-full items-center">
           <div className="w-[min(90vw,800px)] flex-1 p-4">
             <GamePlace />
