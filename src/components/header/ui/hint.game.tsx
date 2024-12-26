@@ -10,9 +10,9 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import {
   BombIcon,
+  CalculatorIcon,
   KeyboardIcon,
   LightbulbIcon,
-  RadicalIcon,
   SendHorizonalIcon,
   UndoIcon,
   XIcon,
@@ -37,7 +37,7 @@ const hints = [
     className: 'bg-success',
   },
   {
-    icon: RadicalIcon,
+    icon: CalculatorIcon,
     description: 'Переключить режим калькулятора',
     className: '',
   },
@@ -57,7 +57,7 @@ export const HintGame = () => {
             <LightbulbIcon />
           </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="w-[min(95vw,800px)]">
           <DialogHeader>
             <DialogDescription>
               <div className="flex flex-col gap-2">

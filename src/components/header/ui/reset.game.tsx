@@ -28,10 +28,10 @@ export const ResetGame = () => {
             <LogOutIcon />
           </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="w-[min(95vw,800px)]">
           <DialogHeader>
-            <DialogTitle>Уверены, что хотите сбросить игру?</DialogTitle>
-            <DialogDescription>
+            <DialogTitle>Сбросить игру?</DialogTitle>
+            <DialogDescription className="text-left">
               Если сбросите игру, то вы потеряете все данные текущего сеанса.
             </DialogDescription>
           </DialogHeader>

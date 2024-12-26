@@ -2,8 +2,8 @@ import { Button } from '@/components/ui/button';
 import { useGameDartsStore } from '@/shared/store/game.darts.store';
 import {
   BombIcon,
+  CalculatorIcon,
   KeyboardIcon,
-  RadicalIcon,
   SendHorizonalIcon,
   UndoIcon,
   XIcon,
@@ -73,7 +73,7 @@ export const ButtonFactory = (props: ButtonFactoryProps) => {
         className="bg-accent rounded-none [&_svg]:size-6 text-accent-foreground hover:text-background"
         onClick={toggleModCalculator}
       >
-        <RadicalIcon />
+        <CalculatorIcon />
       </Button>
     ),
     undoMove: () => (
