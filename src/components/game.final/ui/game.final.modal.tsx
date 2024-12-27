@@ -37,10 +37,10 @@ export const GameFinalModal = () => {
 
   return (
     <Dialog open={openModal} onOpenChange={handleOpenChange}>
-      <DialogContent className='w-[min(95vw,800px)]'>
+      <DialogContent className="w-[min(95vw,800px)]" aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle>Игра закончена</DialogTitle>
-          <DialogDescription className="py-4">
+          <DialogDescription className="py-4" asChild>
             {{ short: () => <ShortReport />, full: () => <FullReport /> }[reportMode]()}
           </DialogDescription>
         </DialogHeader>

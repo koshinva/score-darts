@@ -36,12 +36,12 @@ export const ResetGame = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex flex-row justify-end gap-2">
-            <DialogClose>
+            <DialogClose asChild>
               <Button type="button" variant="secondary">
                 Отменить
               </Button>
             </DialogClose>
-            <DialogClose>
+            <DialogClose asChild>
               <Button onClick={onReset}>Сбросить</Button>
             </DialogClose>
           </DialogFooter>

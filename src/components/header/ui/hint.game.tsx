@@ -4,6 +4,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
@@ -59,7 +60,8 @@ export const HintGame = () => {
         </DialogTrigger>
         <DialogContent className="w-[min(95vw,800px)]">
           <DialogHeader>
-            <DialogDescription>
+            <DialogTitle hidden>Подсказки</DialogTitle>
+            <DialogDescription asChild>
               <div className="flex flex-col gap-2">
                 {hints.map(({ icon: Icon, description, className }, index) => (
                   <React.Fragment key={index}>
