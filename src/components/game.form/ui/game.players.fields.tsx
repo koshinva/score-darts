@@ -16,7 +16,7 @@ export const GamePlayersFields = () => {
   });
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       <GameFormLabel label={`${fields.length} игроков`} />
       <ul className="flex flex-col gap-2">
         {fields.map((field, index) => {
@@ -33,7 +33,12 @@ export const GamePlayersFields = () => {
                     </FormLabel>
                     <div className="flex gap-4 items-center justify-between">
                       <FormControl className="grow-1">
-                        <Input placeholder="Введите имя" {...field} value={field.value} />
+                        <Input
+                          placeholder="Введите имя"
+                          {...field}
+                          value={field.value}
+                          className="placeholder:text-sm text-sm"
+                        />
                       </FormControl>
                       {index !== 0 && (
                         <Button

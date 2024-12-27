@@ -14,7 +14,7 @@ export const GameTypeGroup = () => {
       control={form.control}
       name="type"
       render={({ field }) => (
-        <FormItem className="flex flex-col gap-4">
+        <FormItem className="flex flex-col gap-2">
           <GameFormLabel label="Тип игры" />
           <FormControl>
             <RadioGroup

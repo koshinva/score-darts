@@ -31,9 +31,9 @@ const GameForm = () => {
   return (
     <GameFormContainer>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <GameTypeGroup />
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-2">
             <div className="flex-1 min-w-48">
               <GameSetsSelect />
             </div>
