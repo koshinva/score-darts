@@ -1,8 +1,13 @@
 {
   "name": "darts-scoring",
+  "author": {
+    "name": "Koshin Valery",
+    "email": "koshinva@yandex.ru"
+  },
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://koshinva.github.io/score-darts",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
