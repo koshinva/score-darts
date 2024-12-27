@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { MinusCircleIcon, PlusCircleIcon } from 'lucide-react';
 import { GameFormLabel } from './game.form.label';
 import { GameFormMessage } from './game.form.message';
+import { declension } from '@/shared/helpers/declension';
 
 export const GamePlayersFields = () => {
   const { control } = useFormContext<GameFormType>();
@@ -17,7 +18,9 @@ export const GamePlayersFields = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <GameFormLabel label={`${fields.length} игроков`} />
+      <GameFormLabel
+        label={`${fields.length} ${declension(fields.length, ['игрок', 'игрока', 'игроков'])}`}
+      />
       <ul className="flex flex-col gap-2">
         {fields.map((field, index) => {
           return (
