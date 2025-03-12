@@ -1,50 +1,22 @@
-# React + TypeScript + Vite
+# Darts Score
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+App for calculate score darts
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the repository
+`git clone https://github.com/koshinva/score-darts.git`
 
-## Expanding the ESLint configuration
+2. Install dependencies
+`npm install`
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. Run locally on your machine with the command
+`npm run dev`
 
-- Configure the top-level `parserOptions` property like this:
+1. Go to the browser using the link  `http://localhost:5173/score-darts/` 
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+[Preview](https://koshinva.github.io/score-darts/)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+📫 Ask a question about the project 
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
-```
+<a href="https://t.me/imp_0593" target="_blank" rel="noreferrer"> <img src="https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"/> </a>
